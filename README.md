@@ -80,3 +80,10 @@ module.exports = displayName => {
 
 };
 ```
+
+# 今後の流れ
+
+1. `/.env` を作成し、API Key等をかいていく
+2. `UpdateAccount.js` でそれを読み込む
+3. Twitter APIを叩く
+4. `UpdateAccount.js` で書いた処理を `src/app.js` で実行する
