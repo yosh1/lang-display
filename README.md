@@ -31,3 +31,21 @@ Edit `.babelrc`
 ```
 
 `Version number` is `node -v` 's number
+
+Add for `package.json` on 　`dependencies` .
+
+```
+"scripts": {
+    "start": "nodemon --exec babel-node src/app.js",
+    "build": "babel src --out-dir dest",
+    "boot": "node dest/app.js"
+  },
+```
+
+and, edited Entry point.
+
+```
+"main": "dest/app.js",
+```
+
+
