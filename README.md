@@ -2,8 +2,9 @@
 
 ---
 
-# Setup
+# 設定
 
+## Moduleのインストール
 ```
 $ npm init
 $ npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env @babel/register nodemon
@@ -13,7 +14,7 @@ $ mkdir dest src src/lib
 $ touch .babelrc
 ```
 
-Edit `.babelrc`
+## `.babelrc` を編集。
 
 ```
 {
@@ -30,9 +31,9 @@ Edit `.babelrc`
 }
 ```
 
-`Version number` is `node -v` 's number
+`Version number` は `node -v` で出てきた値。
 
-Add for `package.json` on 　`dependencies` .
+`package.json` の　`dependencies` 上に追記する。
 
 ```
 "scripts": {
@@ -42,13 +43,13 @@ Add for `package.json` on 　`dependencies` .
   },
 ```
 
-and, edited Entry point.
+## エントリポイントの追加
 
 ```
 "main": "dest/app.js",
 ```
 
-and Add `src/main.js`
+## `src/main.js`の追加
 
 ```
 import cron from "node-cron";
