@@ -1,0 +1,26 @@
+{
+  "name": "lang-display",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dest/app.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
+    "nodemon": "^1.18.9"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node src/app.js",
+    "build": "babel src --out-dir dest",
+    "boot": "node dest/app.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
+    "node-cron": "^2.0.3"
+  }
+}
