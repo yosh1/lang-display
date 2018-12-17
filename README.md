@@ -87,3 +87,4 @@ module.exports = displayName => {
 2. `UpdateAccount.js` でそれを読み込む
 3. Twitter APIを叩く
 4. `UpdateAccount.js` で書いた処理を `src/app.js` で実行する
+Other. GitHub APIに関してはTwitter APIの実装が終わった後
