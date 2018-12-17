@@ -23,7 +23,7 @@ $ touch .babelrc
       "@babel/preset-env",
       {
         "targets": {
-          "node": "{Version number}"
+          "node": true
         }
       }
     ]
@@ -51,7 +51,8 @@ $ touch .babelrc
 "main": "dest/app.js",
 ```
 
-## `src/app.js`の追加
+## サンプルの追加
+`src/app.js`を追加。
 
 ```
 import cron from "node-cron";
@@ -63,4 +64,19 @@ cron.schedule("* * * * * *", () => {
 
 ```
 $ npm run start
+```
+これで1秒おきに出力できたらOK。
+
+
+## `src/lib/UpdateProfile.js`　の作成
+
+ここでTwitter APIを叩く。
+
+```
+require("dotenv").config();
+import axios from "axios";
+
+module.exports = displayName => {
+
+};
 ```
