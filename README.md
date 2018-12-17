@@ -48,4 +48,16 @@ and, edited Entry point.
 "main": "dest/app.js",
 ```
 
+and Add `src/main.js`
 
+```
+import cron from "node-cron";
+
+cron.schedule("* * * * * *", () => {
+    console.log("Hello World");
+});
+```
+
+```
+$ npm run start
+```
