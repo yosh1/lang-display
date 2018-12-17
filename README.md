@@ -51,7 +51,7 @@ $ touch .babelrc
 "main": "dest/app.js",
 ```
 
-## `src/main.js`の追加
+## `src/app.js`の追加
 
 ```
 import cron from "node-cron";
