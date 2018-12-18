@@ -1,5 +1,5 @@
 require("dotenv").config();
-import twit from "twit";
+// import twit from "twit";
 import configTwit from '../config-twit'
 
 const Twit = require('twit');
