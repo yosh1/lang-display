@@ -1,8 +1,8 @@
 require("dotenv").config();
-import twit from "twit";
+// import twit from "twit";
 import configTwit from '../config-twit'
 
-const Twit = require('twit');
+// const Twit = require('twit');
 
 // const T = new Twit({
 //   consumer_key: '...',
@@ -17,11 +17,12 @@ const Twit = require('twit');
 
 // T.post('account/update_profile', { name: displayName }, (err, data, res) => {});
 
-module.exports = displayName => {
-
-};
 
 const test = () => {
     console.log(configTwit)
 }
 test()
+
+module.exports = displayName => {
+
+};
