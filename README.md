@@ -2,6 +2,10 @@
 
 ---
 
+# DAY 1
+
+---
+
 # 仕様
 
 ## 概要
@@ -109,6 +113,15 @@ module.exports = displayName => {
 3. Twitter APIを叩く
 4. `UpdateAccount.js` で書いた処理を `src/app.js` で実行する
 5. GitHub APIに関してはTwitter APIの実装が終わった後
+
+---
+# DAY 2
+
+---
+
+```
+$ npm install --save twit
+```
 
 # Run
 
