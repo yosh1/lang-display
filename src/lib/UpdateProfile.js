@@ -1,6 +1,6 @@
 require("dotenv").config();
 import twit from "twit";
-import configTwit from '../config-twit.js'
+import configTwit from '../config-twit'
 
 const Twit = require('twit');
 
@@ -13,10 +13,15 @@ const Twit = require('twit');
 //   strictSSL: true,  
 // });
 
-const T = new Twit(configTwit);
+// const T = new Twit(configTwit);
 
-T.post('account/update_profile', { name: displayName }, (err, data, res) => {});
+// T.post('account/update_profile', { name: displayName }, (err, data, res) => {});
 
 module.exports = displayName => {
 
 };
+
+const test = () => {
+    console.log(configTwit)
+}
+test()
