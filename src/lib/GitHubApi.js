@@ -17,8 +17,6 @@ const getHowManyCommitsInToday = async repoName => {
       if (res.status === 200) {
         gitData = res.data.map(commit => commit.commit.author.date)
         gitDataAdjust = Array.from(new Set(gitData));
-        // console.log(res.data.map(commit => commit.commit.author.date))
-        // console.log(gitData)
         console.log(gitDataAdjust)
       } else {
         console.error(`Status: ${res.status}\n${res.statusText}`);
