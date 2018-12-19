@@ -7,6 +7,8 @@ import githubApi from './lib/GitHubApi.js'
 
 // GitHub APIから言語を取得
 githubApi('OldBigBuddha')
+
 // 取得した言語を渡す
 // updateProfile('OBB a.k.a OJI')
+
 // });
