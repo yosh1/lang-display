@@ -1,5 +1,7 @@
 import Axios from 'axios'
 
+let gitData,gitDataAdjust
+
 const axios = Axios.create({
   baseURL: 'https://api.github.com/',
   headers: {
@@ -13,7 +15,11 @@ const getHowManyCommitsInToday = async repoName => {
   axios.get(`repos/${repoName}/commits`)
     .then(res => {
       if (res.status === 200) {
-        console.log(res.data.map(commit => commit.commit.author.date))
+        gitData = res.data.map(commit => commit.commit.author.date)
+        gitDataAdjust = Array.from(new Set(gitData));
+        // console.log(res.data.map(commit => commit.commit.author.date))
+        // console.log(gitData)
+        console.log(gitDataAdjust)
       } else {
         console.error(`Status: ${res.status}\n${res.statusText}`);
       }
