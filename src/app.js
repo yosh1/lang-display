@@ -7,5 +7,5 @@ import updateProfile from './lib/UpdateProfile.js'
 // GitHub APIから言語を取得
 
 // 取得した言語を渡す
-updateProfile('OBB a.k.a OJI')
+updateProfile('OBB a.k.a OJIs')
 // });
