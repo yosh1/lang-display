@@ -7,6 +7,7 @@ import githubApi from './lib/GitHubApi.js'
 
 // GitHub APIから言語を取得
 githubApi('yoshi1125hisa')
+
 // 取得した言語を渡す
 // updateProfile('yoshi1125hisa')
 
