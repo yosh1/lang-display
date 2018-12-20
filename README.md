@@ -39,7 +39,7 @@ Twitterのプロフィールに「.」を入れて認証すると、GitHubのコ
 ```
 $ npm init
 $ npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env @babel/register nodemon
-$ npm install --save node-cron axios dotenv
+$ npm install --save node-cron axios dotenv twit
 ```
 
 ### ディレクトリ・ファイルの作成
@@ -116,10 +116,4 @@ import axios from "axios";
 module.exports = displayName => {
 
 };
-```
-
-### Twitのインストール
-
-```
-$ npm install --save twit
 ```
