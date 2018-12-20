@@ -53,7 +53,25 @@ function countHowManyCommits() {
 
 // 日付比較
 function dateComparison() {
+  var dateToday = new Date()
+  var year = dateToday.getFullYear()
+  var month = dateToday.getMonth() + 1
+  // var week = dateToday.getDay()
+  var day = dateToday.getDate()
+  // var weekArray = new Array("日","月","火","水","木","金","土");
+  var nowDate = year + "-" + month + "-" + day
+  var momentDate = moment();
+  moment().toISOString();
+  var commitCount 
   for( var i=0 ; i < gitData.length; i++){ // 配列全部取得
-    console.log(arr[i]) // 出力
+    console.log(arr[i])
+    arr[i] = arr[1].slice(0,9) // 10桁にする
+
+    if(nowDate == arr[i]){
+      commitCount++
+      return commitCount
+    }
+
+    // 比較する処理
   }
 }
