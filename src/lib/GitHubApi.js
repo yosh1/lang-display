@@ -1,6 +1,5 @@
 import Axios from 'axios'
-
-let gitData,gitDataAdjust
+import moment from 'moment'
 
 const axios = Axios.create({
   baseURL: 'https://api.github.com/',
@@ -15,9 +14,14 @@ const getHowManyCommitsInToday = async repoName => {
   axios.get(`repos/${repoName}/commits`)
     .then(res => {
       if (res.status === 200) {
-        gitData = res.data.map(commit => commit.commit.author.date)
-        gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧
+        let gitData = res.data.map(commit => commit.commit.author.date)
+        let gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧
+
+        for( let i=0 ; i < gitDataAdjust.length; i++){
+          dataFromNow = moment(gitDataAdjust[i]).fromNow();
+        }
         console.log(gitDataAdjust)
+        console.log(dataFromNow)
       } else {
         console.error(`Status: ${res.status}\n${res.statusText}`);
       }
@@ -52,25 +56,3 @@ module.exports = userName => {
     })
 }
 
-
-
-// 一日のコミット数
-function countHowManyCommits() {
-
-}
-
-// 日付比較
-function dateComparison() {
-  const today = moment(); // 今日
-  const commitDate = moment(commit.date) // コミット日時
-  
-  moment().toISOString();
-  let commitCount = 0
-  for( let i=0 ; i < gitData.length; i++){ // 配列全部取得
-    console.log(arr[i])
-    // 比較する処理
-    if(){
-
-    }
-  }
-}
