@@ -1,30 +1,36 @@
 # Lang display
 
-## Run
+It is a CLI application that obtains the extension of the programming language committed to GitHub and changes Twitter's profile name accordingly.
+
+GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するCLIアプリケーションです。
+
+## Run - 実行方法
 
 ```
+$ git clone https://github.com/yoshi1125hisa/lang-display.git or Fork
+$ npm install
 $ npm run start
 ```
 
 ---
 
-## 仕様
+## Specification　- 仕様
 
-### 概要
+### Discription - 概要
 Twitterのプロフィールに「.」を入れて認証すると、GitHubのコミット履歴を参照し、
 その言語を拡張子として挿入する。
 毎日0:00にcronで定期実行を行う。
 
 `ex) yoshi. => yoshi.txt`
 
-### 例外
+### Exception　- 例外
 - プロフィールの文字列が一定以上になった時
 - 文字列末以外の `.` への反応
 - コミット数が0の時どうするか？
 
 ---
 
-## 流れ
+## Flow - 流れ
 
 1. `/.env` を作成し、API Key等をかいていく
 2. `UpdateAccount.js` でそれを読み込む
@@ -34,22 +40,22 @@ Twitterのプロフィールに「.」を入れて認証すると、GitHubのコ
 
 ---
 
-## 開発手順
+## Develop flow - 開発手順
 
-### Moduleのインストール
+### Install npm module - npm moduleのインストール
 ```
 $ npm init
 $ npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env @babel/register nodemon
 $ npm install --save node-cron axios dotenv twit
 ```
 
-### ディレクトリ・ファイルの作成
+### Make file and directory - ディレクトリ・ファイルの作成
 ```
 $ mkdir dest src src/lib
 $ touch .babelrc
 ```
 
-### `.babelrc` を編集
+### Edit `.babelrc` - `.babelrc` を編集
 
 ```
 {
@@ -66,7 +72,7 @@ $ touch .babelrc
 }
 ```
 
-### `package.json` の編集
+### Edit `package.json` - `package.json` の編集
 
 `dependencies` の上に追記する。
 
@@ -78,7 +84,7 @@ $ touch .babelrc
   },
 ```
 
-### エントリポイントの追加
+### Add entry point - エントリポイントの追加
 
 `package.json` を編集。
 
@@ -86,7 +92,7 @@ $ touch .babelrc
 "main": "dest/app.js",
 ```
 
-### サンプルの追加
+### Add cron sample - cronのサンプルを追加
 
 `src/app.js`を追加。
 
@@ -98,14 +104,18 @@ cron.schedule("* * * * * *", () => {
 });
 ```
 
+#### Run - 実行
 ```
 $ npm run start
 ```
+
+If you can execute this script and output it every 1 second OK.
 これで1秒おきに出力できたらOK。
 
 
-### `src/lib/UpdateProfile.js`　の作成
+### Make`src/lib/UpdateProfile.js` - `src/lib/UpdateProfile.js`　の作成
 
+Use the Twitter API.
 ここでTwitter APIを叩く。
 
 ```
