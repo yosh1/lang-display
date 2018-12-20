@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import moment from 'moment'
+import moment, { relativeTimeRounding } from 'moment'
 
 
 const axios = Axios.create({
@@ -16,13 +16,15 @@ const getHowManyCommitsInToday = async repoName => {
     .then(res => {
       if (res.status === 200) {
         let gitData = res.data.map(commit => commit.commit.author.date)
-        let gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧
+        let gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧 (1)
 
         for( let i=0 ; i < gitDataAdjust.length; i++){
-          let dataFromNow = moment(gitDataAdjust[i]).fromNow()
+          let dataFromNow = moment(gitDataAdjust[i]).fromNow() // (2)
+          return dataFromNow // (3)
         }
-        console.log(gitDataAdjust);
-        console.log(dataFromNow);
+        console.log(gitDataAdjust) // (1')
+        console.log(dataFromNow) // (2')
+        console.log(getValue()) // (3')
       } else {
         console.error(`Status: ${res.status}\n${res.statusText}`);
       }
