@@ -27,14 +27,21 @@ const getHowManyCommitsInToday = async repoName => {
 }
 
 module.exports = userName => {
+
+  // Push情報を得るため ｀/events｀ を叩いてEvent一覧を得る
   axios.get(`users/${userName}/events`)
     .then(res => {
       if (res.status === 200) {
+		  
+		// 更にそのイベント情報から ｀PushEvent｀ だけを抜いた配列
         let repos = res.data.filter(event => event.type === "PushEvent").map(event => event.repo);
-        repos = repos.filter((repo, index, self) => {
+
+		// 重複の削除
+		repos = repos.filter((repo, index, self) => {
             return index === self.indexOf(repo)
         })
-        repos.forEach(repo => {
+
+		repos.forEach(repo => {
           getHowManyCommitsInToday(repo.name)
         });
       } else {
@@ -43,8 +50,9 @@ module.exports = userName => {
     }).catch( err => {
       console.error(err)
     })
-
 }
+
+
 
 // 一日のコミット数
 function countHowManyCommits() {
@@ -53,25 +61,16 @@ function countHowManyCommits() {
 
 // 日付比較
 function dateComparison() {
-  var dateToday = new Date()
-  var year = dateToday.getFullYear()
-  var month = dateToday.getMonth() + 1
-  // var week = dateToday.getDay()
-  var day = dateToday.getDate()
-  // var weekArray = new Array("日","月","火","水","木","金","土");
-  var nowDate = year + "-" + month + "-" + day
-  var momentDate = moment();
+  const today = moment(); // 今日
+  const commitDate = moment(commit.date) // コミット日時
+  
   moment().toISOString();
-  var commitCount 
-  for( var i=0 ; i < gitData.length; i++){ // 配列全部取得
+  let commitCount = 0
+  for( let i=0 ; i < gitData.length; i++){ // 配列全部取得
     console.log(arr[i])
-    arr[i] = arr[i].slice(0,9) // 10桁にする
-
-    if(nowDate == arr[i]){
-      commitCount++
-      return commitCount
-    }
-
     // 比較する処理
+    if(){
+
+    }
   }
 }
