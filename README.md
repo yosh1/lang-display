@@ -13,6 +13,7 @@ $ npm run start
 ### 概要
 Twitterのプロフィールに「.」を入れて認証すると、GitHubのコミット履歴を参照し、
 その言語を拡張子として挿入する。
+毎日0:00にcronで定期実行を行う。
 
 `ex) yoshi. => yoshi.txt`
 
