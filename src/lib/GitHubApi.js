@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import moment from 'moment'
 
+
 const axios = Axios.create({
   baseURL: 'https://api.github.com/',
   headers: {
@@ -8,7 +9,7 @@ const axios = Axios.create({
     'User-Agent': 'lang-display'
   },
   responseType: 'json'
-})
+});
 
 const getHowManyCommitsInToday = async repoName => {
   axios.get(`repos/${repoName}/commits`)
@@ -18,10 +19,10 @@ const getHowManyCommitsInToday = async repoName => {
         let gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧
 
         for( let i=0 ; i < gitDataAdjust.length; i++){
-          dataFromNow = moment(gitDataAdjust[i]).fromNow();
+          let dataFromNow = moment(gitDataAdjust[i]).fromNow()
         }
-        console.log(gitDataAdjust)
-        console.log(dataFromNow)
+        console.log(gitDataAdjust);
+        console.log(dataFromNow);
       } else {
         console.error(`Status: ${res.status}\n${res.statusText}`);
       }
