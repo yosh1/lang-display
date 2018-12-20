@@ -65,7 +65,7 @@ function dateComparison() {
   var commitCount 
   for( var i=0 ; i < gitData.length; i++){ // 配列全部取得
     console.log(arr[i])
-    arr[i] = arr[1].slice(0,9) // 10桁にする
+    arr[i] = arr[i].slice(0,9) // 10桁にする
 
     if(nowDate == arr[i]){
       commitCount++
