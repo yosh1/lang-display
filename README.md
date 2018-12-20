@@ -65,8 +65,6 @@ $ touch .babelrc
 }
 ```
 
-`Version number` は `node -v` で出てきた値。
-
 ### `package.json` の編集
 
 `dependencies` の上に追記する。
