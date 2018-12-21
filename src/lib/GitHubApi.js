@@ -11,26 +11,19 @@ const axios = Axios.create({
   responseType: 'json'
 });
 
-const getHowManyCommitsInToday = async repoName => {
-  axios.get(`repos/${repoName}/commits`)
-    .then(res => {
-      if (res.status === 200) {
-        let gitData = res.data.map(commit => commit.commit.author.date)
-        let gitDataAdjust = Array.from(new Set(gitData)); // ISO8601形式の日付一覧 (1)
+const getUniqueRepositories = events => {
+  return events.map(event => {
+    return {
+      url: event.repo.url,
+      commitCount: event.payload.size
+    }
+  })
+}
 
-        for( let i=0 ; i < gitDataAdjust.length; i++){
-          let dataFromNow = moment(gitDataAdjust[i]).fromNow() // (2)
-          return dataFromNow // (3)
-        }
-        console.log(gitDataAdjust) // (1')
-        console.log(dataFromNow) // (2')
-        console.log(getValue()) // (3')
-      } else {
-        console.error(`Status: ${res.status}\n${res.statusText}`);
-      }
-    }).catch(err => {
-      console.error(err);
-    })
+const getLastDayPushedRepositories = events => {
+  const lastDay = moment().subtract(moment.duration(1, 'days'))
+  const lastDayPushEvents = events.filter(event => moment(event.created_at).date() === lastDay.date())
+  return getUniqueRepositories(lastDayPushEvents)
 }
 
 module.exports = userName => {
@@ -39,23 +32,22 @@ module.exports = userName => {
   axios.get(`users/${userName}/events`)
     .then(res => {
       if (res.status === 200) {
-		  
-		// 更にそのイベント情報から ｀PushEvent｀ だけを抜いた配列
-        let repos = res.data.filter(event => event.type === "PushEvent").map(event => event.repo);
 
-		// 重複の削除
-		repos = repos.filter((repo, index, self) => {
-            return index === self.indexOf(repo)
-        })
+        // 更にそのイベント情報から ｀PushEvent｀ だけを抜いた配列
+        // 現時点で、どのEventが昨日行われたのかはわからない
+        const pushEvents = res.data.filter(event => event.type === 'PushEvent')
 
-		repos.forEach(repo => {
-          getHowManyCommitsInToday(repo.name)
-        });
-      } else {
-        console.error(`Status: ${res.status}\n${res.statusText}`);
-      }
+        // 昨日PushされたRepositoryだけを抜き出す
+        const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
+
+        // 重複を削除しつつ、コミット数を計算
+
+        // 取得したRepoから言語名を取得
+
+        } else {
+          console.error(`Status: ${res.status}\n${res.statusText}`);
+        }
     }).catch( err => {
       console.error(err)
     })
 }
-

@@ -9,6 +9,6 @@ import githubApi from './lib/GitHubApi.js'
 githubApi('yoshi1125hisa')
 
 // 取得した言語を渡す
-updateProfile('yoshi.py')
+// updateProfile('yoshi.py')
 
 // });
