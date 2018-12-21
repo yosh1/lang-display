@@ -47,6 +47,7 @@ module.exports = userName => {
 
 
         // 取得したRepoから言語名を取得
+        
         console.log(pushEvents);
         console.log(lastDayPushedRepositories);
         } else {
