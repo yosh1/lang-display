@@ -42,9 +42,13 @@ module.exports = userName => {
 
         // 重複を削除しつつ、コミット数を計算
 
+        // 最もコミット数が多かったRepositoryを抽出
+
         // 取得したRepoから言語名を取得
         console.log(pushEvents);
         console.log(lastDayPushedRepositories);
+
+
 
         } else {
           console.error(`Status: ${res.status}\n${res.statusText}`);
