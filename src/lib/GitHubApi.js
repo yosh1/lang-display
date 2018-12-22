@@ -43,16 +43,27 @@ module.exports = userName => {
         // 重複を削除しつつ、コミット数を計算
         const lastDayPushRepoDel = Array.from(new Set(lastDayPushedRepositories));
 
-        let maxCount = 0
+        const removeDuplicationRepositories = repositories => {
+          const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
+          repositories.shift() // すでに代入したので先頭を削除
         
-        // 最もコミット数が多かったRepositoryを抽出
-        for(let i = 0; i < lastDayPushRepoDel.length; i++) {
-          // console.log(lastDayPushRepoDel[i])
-          let mostCommitCount = lastDayPushRepoDel[i].commitCount
-          if(maxCount < mostCommitCount) {
-            maxCount = mostCommitCount
-            console.log(maxCount)
+          if (repositories.length > 0) {
+            // 渡されたrepositoryが2個以上の場合
+        
+            let isExistRepositoryAlready = false
+        
+            repositories.forEach(repository, index => {
+                // すでにRepositoryがtempReposに登録されているか？
+                isExistRepositoryAlready = tempRepos.some(alreadyExistRepository => alreadyExistRepository.url === repository.url)
+                if (isExistRepositoryAlready) {
+                  // 登録されていた場合
+                } else {
+                  // 登録されていなかった場合
+                }
+              })
           }
+        
+          return tempRepos
         }
 
         // 取得したRepoから言語名を取得
