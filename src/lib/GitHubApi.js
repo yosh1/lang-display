@@ -26,6 +26,36 @@ const getLastDayPushedRepositories = events => {
   return getUniqueRepositories(lastDayPushEvents)
 }
 
+const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
+  array.forEach((repository, index) => {
+    // マッチした要素のIndexを返却する
+    if (repository.url === targetRepository.url) return index
+  })
+
+  // マッチしなかったらundefined
+  return undefined
+}
+
+const removeDuplicationRepositories = repositories => {
+  const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
+  repositories.shift() // すでに代入したので先頭を削除
+
+  if (repositories.length > 0) {
+    // 渡されたrepositoryが2個以上の場合
+    let existRepositoryIndexWithUndefined
+    repositories.forEach(repository => {
+      existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
+      if (existRepositoryIndexWithUndefined === undefined) {
+        tempRepos.push(repository)
+      } else {
+        tempRepos[existRepositoryIndexWithUndefined].commitCount += repository.commitCount
+      }
+    })
+  }
+
+  return tempRepos
+}
+
 module.exports = userName => {
 
   // Push情報を得るため ｀/events｀ を叩いてEvent一覧を得る
@@ -39,8 +69,12 @@ module.exports = userName => {
 
         // 昨日PushされたRepositoryだけを抜き出す
         const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
+        console.log('== lastDayPushedRepositories ==')
+        console.log(lastDayPushedRepositories)
 
         // 重複を削除しつつ、コミット数を計算
+        console.log('\n== removeDuplicationRepositories(lastDayPushedRepositories) ==')
+        console.log( removeDuplicationRepositories(lastDayPushedRepositories) )
 
         // 最もコミット数が多かったRepositoryを抽出
 
