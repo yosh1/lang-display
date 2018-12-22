@@ -41,15 +41,24 @@ module.exports = userName => {
         const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
 
         // 重複を削除しつつ、コミット数を計算
-        const pushEventsDel = Array.from(new Set(pushEvents));
+        const lastDayPushRepoDel = Array.from(new Set(lastDayPushedRepositories));
 
         // 最もコミット数が多かったRepositoryを抽出
-
+        for(let i = 0; i < lastDayPushRepoDel.length; i++) {
+          // console.log(lastDayPushRepoDel[i])
+          let mostCommitCount = lastDayPushRepoDel.commitCount
+          let maxCount = 0
+          if(maxCount < mostCommitCount) {
+            maxCount = mostCommitCount
+          }
+        }
 
         // 取得したRepoから言語名を取得
-        
-        console.log(pushEvents);
-        console.log(lastDayPushedRepositories);
+        const getLang = lastDayPushRepoDel.url + "languages"
+      
+        // console.log(pushEvents);
+        // console.log(lastDayPushedRepositories);
+        // console.log(lastDayPushRepoDel);
         } else {
           console.error(`Status: ${res.status}\n${res.statusText}`);
         }
