@@ -43,24 +43,31 @@ module.exports = userName => {
         // 重複を削除しつつ、コミット数を計算
         const lastDayPushRepoDel = Array.from(new Set(lastDayPushedRepositories));
 
+        const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
+          array.forEach((repository, index) => {
+            // マッチした要素のIndexを返却する
+            if (repository.url === targetRepository.url) return index
+          })
+        
+          // マッチしなかったらundefined
+          return undefined
+        }
+        
         const removeDuplicationRepositories = repositories => {
           const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
           repositories.shift() // すでに代入したので先頭を削除
         
           if (repositories.length > 0) {
             // 渡されたrepositoryが2個以上の場合
-        
-            let isExistRepositoryAlready = false
-        
-            repositories.forEach(repository, index => {
-                // すでにRepositoryがtempReposに登録されているか？
-                isExistRepositoryAlready = tempRepos.some(alreadyExistRepository => alreadyExistRepository.url === repository.url)
-                if (isExistRepositoryAlready) {
-                  // 登録されていた場合
-                } else {
-                  // 登録されていなかった場合
-                }
-              })
+            let existRepositoryIndexWithUndefined
+            repositories.forEach(repository => {
+              existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
+              if (existRepositoryIndexWithUndefined === undefined) {
+                tempRepos.push(repository)
+              } else {
+                tempRepos[existRepositoryIndexWithUndefined].commitCount += repository.commitCount
+              }
+            })
           }
         
           return tempRepos
