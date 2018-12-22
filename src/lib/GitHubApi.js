@@ -43,13 +43,15 @@ module.exports = userName => {
         // 重複を削除しつつ、コミット数を計算
         const lastDayPushRepoDel = Array.from(new Set(lastDayPushedRepositories));
 
+        let maxCount = 0
+        
         // 最もコミット数が多かったRepositoryを抽出
         for(let i = 0; i < lastDayPushRepoDel.length; i++) {
           // console.log(lastDayPushRepoDel[i])
-          let mostCommitCount = lastDayPushRepoDel.commitCount
-          let maxCount = 0
+          let mostCommitCount = lastDayPushRepoDel[i].commitCount
           if(maxCount < mostCommitCount) {
             maxCount = mostCommitCount
+            console.log(maxCount)
           }
         }
 
