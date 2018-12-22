@@ -4,6 +4,9 @@ It is a CLI application that obtains the extension of the programming language c
 
 GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するCLIアプリケーションです。
 
+<img src="https://github.com/yoshi1125hisa/lang-display/blob/master/img/lang-display.png?raw=true" width="100%">
+
+
 ## Run - 実行方法
 
 ```
@@ -116,6 +119,7 @@ If you can execute this script and output it every 1 second OK.
 ### Make`src/lib/UpdateProfile.js` - `src/lib/UpdateProfile.js`　の作成
 
 Use the Twitter API.
+
 ここでTwitter APIを叩く。
 
 ```
