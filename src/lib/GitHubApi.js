@@ -27,11 +27,12 @@ const getLastDayPushedRepositories = events => {
 }
 
 const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
-  array.forEach((repository, index) => {
+  for (let index = 0; index < array.length; index++) {
     // マッチした要素のIndexを返却する
-    if (repository.url === targetRepository.url) return index
-  })
-
+    if (array[index].url === targetRepository.url) {
+      return index
+    }
+  }
   // マッチしなかったらundefined
   return undefined
 }
@@ -39,12 +40,14 @@ const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array
 const removeDuplicationRepositories = repositories => {
   const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
   repositories.shift() // すでに代入したので先頭を削除
+  // Clear
 
   if (repositories.length > 0) {
     // 渡されたrepositoryが2個以上の場合
     let existRepositoryIndexWithUndefined
     repositories.forEach(repository => {
       existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
+
       if (existRepositoryIndexWithUndefined === undefined) {
         tempRepos.push(repository)
       } else {
@@ -56,34 +59,36 @@ const removeDuplicationRepositories = repositories => {
   return tempRepos
 }
 
-module.exports = userName => {
+// module.exports = userName => {
 
-  // Push情報を得るため ｀/events｀ を叩いてEvent一覧を得る
-  axios.get(`users/${userName}/events`)
-    .then(res => {
-      if (res.status === 200) {
+//   // Push情報を得るため ｀/events｀ を叩いてEvent一覧を得る
+//   axios.get(`users/${userName}/events`)
+//     .then(res => {
+//       if (res.status === 200) {
 
-        // 更にそのイベント情報から ｀PushEvent｀ だけを抜いた配列
-        // 現時点で、どのEventが昨日行われたのかはわからない
-        const pushEvents = res.data.filter(event => event.type === 'PushEvent')
+//         // 更にそのイベント情報から ｀PushEvent｀ だけを抜いた配列
+//         // 現時点で、どのEventが昨日行われたのかはわからない
+//         const pushEvents = res.data.filter(event => event.type === 'PushEvent')
 
-        // 昨日PushされたRepositoryだけを抜き出す
-        const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
-        console.log('== lastDayPushedRepositories ==')
-        console.log(lastDayPushedRepositories)
+//         // 昨日PushされたRepositoryだけを抜き出す
+//         const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
+//         console.log('== lastDayPushedRepositories ==')
+//         console.log(lastDayPushedRepositories)
 
-        // 重複を削除しつつ、コミット数を計算
-        console.log('\n== removeDuplicationRepositories(lastDayPushedRepositories) ==')
-        console.log( removeDuplicationRepositories(lastDayPushedRepositories) )
+//         // 重複を削除しつつ、コミット数を計算
+//         console.log('\n== removeDuplicationRepositories(lastDayPushedRepositories) ==')
+//         console.log( removeDuplicationRepositories(lastDayPushedRepositories) )
 
-        // 最もコミット数が多かったRepositoryを抽出
+//         // 最もコミット数が多かったRepositoryを抽出
 
-        // 取得したRepositoryから言語名を取得
+//         // 取得したRepositoryから言語名を取得
 
-        } else {
-          console.error(`Status: ${res.status}\n${res.statusText}`);
-        }
-    }).catch( err => {
-      console.error(err)
-    })
-}
+//         } else {
+//           console.error(`Status: ${res.status}\n${res.statusText}`);
+//         }
+//     }).catch( err => {
+//       console.error(err)
+//     })
+// }
+
+module.exports = removeDuplicationRepositories
