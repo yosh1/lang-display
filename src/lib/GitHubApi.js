@@ -76,40 +76,10 @@ module.exports = userName => {
         const uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
         console.log(uniqueLastDayPushedRepositories)
 
-
-        const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
-          array.forEach((repository, index) => {
-            // マッチした要素のIndexを返却する
-            if (repository.url === targetRepository.url) return index
-            
-          })
-        
-          // マッチしなかったらundefined
-          return undefined
-        }
-        
-        const removeDuplicationRepositories = repositories => {
-          const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
-          repositories.shift() // すでに代入したので先頭を削除
-        
-          if (repositories.length > 0) {
-            // 渡されたrepositoryが2個以上の場合
-            let existRepositoryIndexWithUndefined
-            repositories.forEach(repository => {
-              existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
-              if (existRepositoryIndexWithUndefined === undefined) {
-                tempRepos.push(repository)
-              } else {
-                tempRepos[existRepositoryIndexWithUndefined].commitCount += repository.commitCount
-              }
-            })
-          }
-          console.log(tempRepos);        
-          return tempRepos
-        } 
+        // 得たリポのうち、最もコミット数の多いリポを取得
 
         // 取得したRepoから言語名を取得
-        const getLang = lastDayPushRepoDel.url + "languages"
+        // const getLang = lastDayPushRepoDel.url + "languages"
         } else {
           console.error(`Status: ${res.status}\n${res.statusText}`);
         }
