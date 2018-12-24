@@ -47,6 +47,7 @@ module.exports = userName => {
           array.forEach((repository, index) => {
             // マッチした要素のIndexを返却する
             if (repository.url === targetRepository.url) return index
+            
           })
         
           // マッチしなかったらundefined
@@ -69,16 +70,12 @@ module.exports = userName => {
               }
             })
           }
-        
+          console.log(tempRepos);        
           return tempRepos
-        }
+        } 
 
         // 取得したRepoから言語名を取得
         const getLang = lastDayPushRepoDel.url + "languages"
-      
-        // console.log(pushEvents);
-        // console.log(lastDayPushedRepositories);
-        // console.log(lastDayPushRepoDel);
         } else {
           console.error(`Status: ${res.status}\n${res.statusText}`);
         }
