@@ -130,3 +130,8 @@ module.exports = displayName => {
 
 };
 ```
+
+# Special Thanks
+- @OldBigBuddha
+- @floppy73
+- @progedu
