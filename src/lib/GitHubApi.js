@@ -74,7 +74,15 @@ module.exports = userName => {
 
         // 重複を削除しつつ、コミット数を計算
         const uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
+        
+        // unique...Repositories がunidefined / null / falseなら
+        if(uniqueLastDayPushedRepositories == null) {
+
+        }
+
         console.log(uniqueLastDayPushedRepositories)
+
+        
 
         // 得たリポのうち、最もコミット数の多いリポを取得
 
