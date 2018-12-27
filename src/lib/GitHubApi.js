@@ -76,8 +76,8 @@ module.exports = userName => {
         const uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
         
         // unique...Repositories がunidefined / null / falseなら
-        if(uniqueLastDayPushedRepositories == null) {
-
+        if(uniqueLastDayPushedRepositories === undefined) {
+          uniqueLastDayPushedRepositories = null
         }
 
         console.log(uniqueLastDayPushedRepositories)
