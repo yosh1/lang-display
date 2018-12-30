@@ -6,7 +6,7 @@ import github from './lib/GitHubApi.js'
 //     console.log("Hello World");
 
 // GitHub APIから言語を取得
-const userId = 'yoshi1125hisa'
+const userId = 'leica19'
 const languageName = github(userId)
 
 
