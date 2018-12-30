@@ -71,16 +71,50 @@ module.exports = userName => {
 
         // 昨日PushされたRepositoryだけを抜き出す
         const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
+        let uniqueLastDayPushedRepositories;
+        let maxLastDayPushedRepositories;
 
-        // 重複を削除しつつ、コミット数を計算
-        let uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
-        
         // unique...Repositories がunidefinedなら
-        if(uniqueLastDayPushedRepositories == undefined) {
+        if(lastDayPushedRepositories === undefined || lastDayPushedRepositories[0] === undefined) {
           uniqueLastDayPushedRepositories = "null"
-        }
-        console.log(uniqueLastDayPushedRepositories)
+        }else{
+          // 重複を削除しつつ、コミット数を計算
+          uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
 
+          // commitcountが最大のものを抽出
+          maxLastDayPushedRepositories = Math.max.apply(null,uniqueLastDayPushedRepositories.map(function(o){return o.commitCount}))
+
+          const result = Object.keys(uniqueLastDayPushedRepositories).filter((key) => { 
+            return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
+           })
+          
+          console.log(result);
+        }
+
+        
+        
+        
+        //console.log(uniqueLastDayPushedRepositories)
+        console.log(maxLastDayPushedRepositories)
+        /* 
+        
+        null 
+        
+        or 
+        
+        [ { url:
+          'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial',
+         commitCount: 2 },
+       { url: 'https://api.github.com/repos/yoshi1125hisa/web-ar',
+         commitCount: 12 },
+       { url: 'https://api.github.com/repos/yoshi1125hisa/web-ar-js',
+         commitCount: 1 },
+       { url: 'https://api.github.com/repos/y-and-y/y-and-y.github.io',
+         commitCount: 4 },
+       { url:
+          'https://api.github.com/repos/y-and-y/sample-android-app-overlay',
+         commitCount: 2 } ] 
+         */
   
 
         // 得たリポのうち、最もコミット数の多いリポを取得
