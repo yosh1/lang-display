@@ -84,10 +84,11 @@ module.exports = userName => {
           // commitcountが最大のものを抽出
           maxLastDayPushedRepositories = Math.max.apply(null,uniqueLastDayPushedRepositories.map(function(o){return o.commitCount}))
 
-          const result = Object.keys(uniqueLastDayPushedRepositories).filter((key) => { 
-            return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
-           })
-          
+          // const result = Object.keys(uniqueLastDayPushedRepositories).filter((key) => { 
+          //   return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
+          //  })
+
+          let result = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
           console.log(result);
         }
 
