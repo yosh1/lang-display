@@ -77,6 +77,7 @@ module.exports = userName => {
         // unique...Repositories がunidefinedなら
         if(lastDayPushedRepositories === undefined || lastDayPushedRepositories[0] === undefined) {
           uniqueLastDayPushedRepositories = "null"
+          maxLastDayPushedRepositories = "null"
         }else{
           // 重複を削除しつつ、コミット数を計算
           uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
@@ -88,16 +89,22 @@ module.exports = userName => {
           //   return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
           //  })
 
-          let result = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
-          console.log(result);
-          console.log(result["url"]);
+          let getResultCommitArray = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
+          let getResultUrl = []
+          // console.log(getResultCommitArray);
+          // [ { url: 'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial', commitCount: 2 } ]
+          for( let i=0; i < getResultCommitArray.length; i++){
+            getResultUrl.push(getResultCommitArray[i].url)
+          }
+          if(getResultUrl.length >= 2){    // もしURLの配列が２個以上なら
+
+          }
+          // console.log(getResultUrl);    // URL Array
+          
         }
 
-        
-        
-        
-        //console.log(uniqueLastDayPushedRepositories)
-        console.log(maxLastDayPushedRepositories)
+        // console.log(uniqueLastDayPushedRepositories)
+        // console.log(maxLastDayPushedRepositories)    // 7
         /* 
         
         null 
