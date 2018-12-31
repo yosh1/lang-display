@@ -90,6 +90,7 @@ module.exports = userName => {
 
           let result = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
           console.log(result);
+          console.log(result["url"]);
         }
 
         
