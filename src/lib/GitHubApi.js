@@ -99,7 +99,7 @@ module.exports = userName => {
   
           if(getResultUrlArray.length === 1){    // もしURLの配列が1個なら
             // getResultCommitArray[0] をGet
-          }else{ // ２個以上、それ以外
+          }else{ // ２個以上
             
 
           }
