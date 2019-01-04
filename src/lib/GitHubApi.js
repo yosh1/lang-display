@@ -94,8 +94,9 @@ module.exports = userName => {
           // console.log(getResultCommitArray);
           // [ { url: 'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial', commitCount: 2 } ]
           for( let i=0; i < getResultCommitArray.length; i++){
-            getResultUrlArray.push(getResultCommitArray[i].url)
+            getResultUrlArray.push(getResultCommitArray[i].url + "languages")
             getResultCommitArray[i].url.replace("https://api.github.com/",""); // URL置換
+            
           }
   
           if(getResultUrlArray.length === 1){    // もしURLの配列が1個なら
