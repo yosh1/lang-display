@@ -88,17 +88,16 @@ module.exports = userName => {
           //   return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
           //  })
 
-          let getResultCommitArray = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
-          let getResultUrlArray = []
+          let resultCommitArray = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
+          let resultUrlArray = []
 
           // console.log(getResultCommitArray);
           // [ { url: 'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial', commitCount: 2 } ]
-          for( let i=0; i < getResultCommitArray.length; i++){
-            getResultUrlArray.push(getResultCommitArray[i].url + "languages")
-            getResultCommitArray[i].url.replace("https://api.github.com/",""); // URL置換
-            
+          for( let i=0; i < resultCommitArray.length; i++){
+            resultUrlArray.push(resultCommitArray[i].url.replace("https://api.github.com/","") + "/languages")
           }
-          console.log(getResultUrlArray);    // URL Array
+          getLangName()
+          console.log(resultUrlArray);    // URL Array
         }
 
         // console.log(uniqueLastDayPushedRepositories)
@@ -136,10 +135,8 @@ module.exports = userName => {
     })
 }
 
-const getLangName = () => {
-
-
-  axios.get(getResultUrlArray)
+const getLangName = (resultUrlArray) => {
+  axios.get(resultUrlArray)
     .then(res => {
       if (res.status === 200) {
 
@@ -149,10 +146,10 @@ const getLangName = () => {
         "Dart": 1000
         }
         */
-
-
+        
         const bestLang = res.data[0] // 言語
         const bestLangCommitNum = res.data[1] // その言語のコミット数
+        console.log(bestLang+bestLangCommitNum)
       }else{
        console.error(`Status: ${res.status}\n${res.statusText}`);
       }
