@@ -98,14 +98,6 @@ module.exports = userName => {
             getResultCommitArray[i].url.replace("https://api.github.com/",""); // URL置換
             
           }
-  
-          if(getResultUrlArray.length === 1){    // もしURLの配列が1個なら
-            // getResultCommitArray[0] をGet
-          }else{ // ２個以上
-            
-
-          }
-          
           console.log(getResultUrlArray);    // URL Array
         }
 
@@ -145,16 +137,26 @@ module.exports = userName => {
 }
 
 const getLangName = () => {
-  module.exports = () => {  
-  axios.get(repoUrl)
+
+
+  axios.get(getResultUrlArray)
     .then(res => {
       if (res.status === 200) {
-      
+
+        /* sample
+        {
+        "HTML": 2168,
+        "Dart": 1000
+        }
+        */
+
+
+        const bestLang = res.data[0] // 言語
+        const bestLangCommitNum = res.data[1] // その言語のコミット数
       }else{
-      
+       console.error(`Status: ${res.status}\n${res.statusText}`);
       }
     }).catch( err => {
       console.error(err)
     })
-  }
 }
