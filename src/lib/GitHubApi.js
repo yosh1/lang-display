@@ -136,7 +136,8 @@ module.exports = userName => {
 }
 
 const getLangName = (resultUrlArray) => {
-  axios.get(resultUrlArray)
+  for (let i=0;i < resultCommitArray.length; i++){
+  axios.get(resultUrlArray[i])
     .then(res => {
       if (res.status === 200) {
 
@@ -156,4 +157,5 @@ const getLangName = (resultUrlArray) => {
     }).catch( err => {
       console.error(err)
     })
+  }
 }
