@@ -99,35 +99,7 @@ module.exports = userName => {
           getLangName(resultUrlArray)
           console.log(resultUrlArray)    // URL Array
         }
-
-        // console.log(uniqueLastDayPushedRepositories)
-        // console.log(maxLastDayPushedRepositories)    // 7
-        /* 
-        
-        null 
-        
-        or 
-        
-        [ { url:
-          'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial',
-         commitCount: 2 },
-       { url: 'https://api.github.com/repos/yoshi1125hisa/web-ar',
-         commitCount: 12 },
-       { url: 'https://api.github.com/repos/yoshi1125hisa/web-ar-js',
-         commitCount: 1 },
-       { url: 'https://api.github.com/repos/y-and-y/y-and-y.github.io',
-         commitCount: 4 },
-       { url:
-          'https://api.github.com/repos/y-and-y/sample-android-app-overlay',
-         commitCount: 2 } ] 
-         */
-  
-
-        // 得たリポのうち、最もコミット数の多いリポを取得
-
-        // 取得したRepoから言語名を取得
-        // const getLang = lastDayPushRepoDel.url + "languages"
-        } else {
+      } else {
           console.error(`Status: ${res.status}\n${res.statusText}`);
         }
     }).catch( err => {
@@ -139,19 +111,11 @@ const getLangName = (resultUrl) => {
   for (let i=0;i < resultUrl.length; i++){
   axios.get(resultUrl[i])
     .then(res => {
-      console.log(res);
       if (res.status === 200) {
-
-        /* sample
-        {
-        "HTML": 2168,
-        "Dart": 1000
-        }
-        */
-        
-        const bestLang = res.data[0] // 言語
-        const bestLangCommitNum = res.data[1] // その言語のコミット数
-        console.log(bestLang+bestLangCommitNum)
+        const resultBestCommitlang = Object.keys(res.data)[0]
+        const resultBestCommitNum = res.data[Object.keys(res.data)[0]]
+        /*{ HTML: 22779, JavaScript: 12130, CSS: 8821 }*/
+        console.log(resultBestCommitlang + ":" + resultBestCommitNum)
       }else{
        console.error(`Status: ${res.status}\n${res.statusText}`);
       }
