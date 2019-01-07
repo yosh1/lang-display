@@ -139,6 +139,7 @@ const getLangName = (resultUrl) => {
   for (let i=0;i < resultUrl.length; i++){
   axios.get(resultUrl[i])
     .then(res => {
+      console.log(res);
       if (res.status === 200) {
 
         /* sample
