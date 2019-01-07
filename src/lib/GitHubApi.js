@@ -96,8 +96,8 @@ module.exports = userName => {
           for( let i=0; i < resultCommitArray.length; i++){
             resultUrlArray.push(resultCommitArray[i].url.replace("https://api.github.com/","") + "/languages")
           }
-          getLangName()
-          console.log(resultUrlArray);    // URL Array
+          getLangName(resultUrlArray)
+          console.log(resultUrlArray)    // URL Array
         }
 
         // console.log(uniqueLastDayPushedRepositories)
@@ -135,9 +135,9 @@ module.exports = userName => {
     })
 }
 
-const getLangName = (resultUrlArray) => {
-  for (let i=0;i < resultCommitArray.length; i++){
-  axios.get(resultUrlArray[i])
+const getLangName = (resultUrl) => {
+  for (let i=0;i < resultUrl.length; i++){
+  axios.get(resultUrl[i])
     .then(res => {
       if (res.status === 200) {
 
