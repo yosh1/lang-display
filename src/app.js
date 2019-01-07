@@ -6,8 +6,8 @@ import github from './lib/GitHubApi.js'
 //     console.log("Hello World");
 
 // GitHub APIから言語を取得
-// const userId = 'fabpot' // Max - > array
-const userId = 'volanthers' // Min -> null
+const userId = 'yoshi1125hisa' // Max - > array const userId = 'fabpot'
+// const userId = 'volanthers' // Min -> null
 const languageName = github(userId)
 
 
