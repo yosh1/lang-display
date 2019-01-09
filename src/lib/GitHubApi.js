@@ -9,7 +9,7 @@ const axios = Axios.create({
     'User-Agent': 'lang-display'
   },
   responseType: 'json'
-});
+})
 
 const getUniqueRepositories = events => {
   return events.map(event => {
@@ -71,28 +71,16 @@ module.exports = userName => {
 
         // 昨日PushされたRepositoryだけを抜き出す
         const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
-        let uniqueLastDayPushedRepositories;
-        let maxLastDayPushedRepositories;
+        let uniqueLastDayPushedRepositories
+        let maxLastDayPushedRepositories
 
-        // unique...Repositories がunidefinedなら
-        if(lastDayPushedRepositories === undefined || lastDayPushedRepositories[0] === undefined) {
+        if (lastDayPushedRepositories === undefined || lastDayPushedRepositories[0] === undefined) {
           console.log("null")
-        }else{
-          // 重複を削除しつつ、コミット数を計算
+        } else {
           uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
-
-          // commitcountが最大のものを抽出
           maxLastDayPushedRepositories = Math.max.apply(null,uniqueLastDayPushedRepositories.map(function(o){return o.commitCount}))
-
-          // const result = Object.keys(uniqueLastDayPushedRepositories).filter((key) => { 
-          //   return uniqueLastDayPushedRepositories[key] === maxLastDayPushedRepositories
-          //  })
-
           let resultCommitArray = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
           let resultUrlArray = []
-
-          // console.log(getResultCommitArray);
-          // [ { url: 'https://api.github.com/repos/yoshi1125hisa/ruby-on-rails-tutorial', commitCount: 2 } ]
           for( let i=0; i < resultCommitArray.length; i++){
             resultUrlArray.push(resultCommitArray[i].url.replace("https://api.github.com/","") + "/languages")
           }
@@ -100,7 +88,7 @@ module.exports = userName => {
           console.log(resultUrlArray)    // URL Array
         }
       } else {
-          console.error(`Status: ${res.status}\n${res.statusText}`);
+          console.error(`Status: ${res.status}\n${res.statusText}`)
         }
     }).catch( err => {
       console.error(err)
@@ -112,12 +100,11 @@ const getLangName = (resultUrl) => {
   axios.get(resultUrl[i])
     .then(res => {
       if (res.status === 200) {
-        const resultBestCommitlang = Object.keys(res.data)[0]
+        const resultBestCommitLang = Object.keys(res.data)[0]
         const resultBestCommitNum = res.data[Object.keys(res.data)[0]]
-        /*{ HTML: 22779, JavaScript: 12130, CSS: 8821 }*/
-        console.log(resultBestCommitlang + ":" + resultBestCommitNum)
-      }else{
-       console.error(`Status: ${res.status}\n${res.statusText}`);
+        console.log(resultBestCommitLang + ":" + resultBestCommitNum)
+      } else {
+       console.error(`Status: ${res.status}\n${res.statusText}`)
       }
     }).catch( err => {
       console.error(err)
