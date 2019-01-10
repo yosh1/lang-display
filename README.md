@@ -9,11 +9,14 @@ GitHubにコミットされたプログラミング言語の拡張を取得し�
 
 ## Run - 実行方法
 
+### Local
+
 ```
 $ git clone https://github.com/yoshi1125hisa/lang-display.git or Fork
 $ npm install
 $ npm run start
 ```
+### Docker
 
 ```
 $ docker build -t lang-display .
