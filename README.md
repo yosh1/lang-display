@@ -15,6 +15,12 @@ $ npm install
 $ npm run start
 ```
 
+```
+$ docker build -t lang-display .
+$ docker run -it lang-display
+```
+
+
 ---
 
 ## Specification　- 仕様
