@@ -3,21 +3,18 @@ FROM node:10.11.0-alpine
 ENV NODE_ENV=development
 USER root
 
-# fish / vim / git / bash
-RUN apk update && apk add \
-    fish \
-    vim  \
-    git  \
-    bash
+RUN apk update && \
+    apk add vim  \
+            git 
 
 RUN apk add --update nodejs nodejs-npm
 
-RUN npm install
-
-ARG project_dir
+ARG project_dir=/app/
 ADD . ${project_dir}
 WORKDIR ${project_dir}
 
+RUN npm install
+
 # EXPOSE 3000
 
-CMD [ "npm","start"]
+CMD [ "npm","run","start"]
