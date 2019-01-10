@@ -1,8 +1,8 @@
 # Lang display
 
-It is a CLI application that obtains the extension of the programming language committed to GitHub and changes Twitter's profile name accordingly.
+It is an application that obtains the extension of the programming language committed to GitHub and changes Twitter's profile name accordingly.
 
-GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するCLIアプリケーションです。
+GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するアプリケーションです。
 
 <img src="https://github.com/yoshi1125hisa/lang-display/blob/master/img/lang-display.png?raw=true" width="100%">
 
