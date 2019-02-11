@@ -20,7 +20,10 @@ $ npm run start
 
 ```
 $ docker build -t lang-display .
-$ docker run -it lang-display
+# docker run -it lang-display ash
+
+# express 導入後
+# docker run -it -p 3000:3000 lang-display
 ```
 
 
