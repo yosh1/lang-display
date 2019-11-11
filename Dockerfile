@@ -6,8 +6,9 @@ ARG project_dir=/app/
 ADD . ${project_dir}
 WORKDIR ${project_dir}
 
-RUN apk update && \
-    npm install
+RUN set -x && \
+    apk update --no-cache && \
+    npm i
 
 EXPOSE 3000
 
