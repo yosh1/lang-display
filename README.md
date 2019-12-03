@@ -1,13 +1,11 @@
-# Lang display
-
-It is an application that obtains the extension of the programming language committed to GitHub and changes Twitter's profile name accordingly.
+# Lang display - WIP
 
 GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するアプリケーションです。
 
 <img src="https://github.com/yoshi1125hisa/lang-display/blob/master/img/lang-display.png?raw=true" width="100%">
 
 
-## Run - 実行方法
+## How2Run
 
 ### Local
 
@@ -29,23 +27,23 @@ $ docker build -t lang-display .
 
 ---
 
-## Specification　- 仕様
+## Specification
 
-### Discription - 概要
+### Discription
 Twitterのプロフィールに「.」を入れて認証すると、GitHubのコミット履歴を参照し、
 その言語を拡張子として挿入する。
 毎日0:00にcronで定期実行を行う。
 
 `ex) yoshi. => yoshi.txt`
 
-### Exception　- 例外
+### Exception
 - プロフィールの文字列が一定以上になった時
 - 文字列末以外の `.` への反応
 - コミット数が0の時どうするか？
 
 ---
 
-## Flow - 流れ
+## Flow
 
 1. `/.env` を作成し、API Key等をかいていく
 2. `UpdateAccount.js` でそれを読み込む
@@ -55,22 +53,22 @@ Twitterのプロフィールに「.」を入れて認証すると、GitHubのコ
 
 ---
 
-## Develop flow - 開発手順
+## Develop flow
 
-### Install npm module - npm moduleのインストール
+### Install npm module
 ```
 $ npm init
 $ npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env @babel/register nodemon
 $ npm install --save node-cron axios dotenv twit
 ```
 
-### Make file and directory - ディレクトリ・ファイルの作成
+### Make file and directory
 ```
 $ mkdir dest src src/lib
 $ touch .babelrc
 ```
 
-### Edit `.babelrc` - `.babelrc` を編集
+### Edit `.babelrc`
 
 ```
 {
@@ -87,7 +85,7 @@ $ touch .babelrc
 }
 ```
 
-### Edit `package.json` - `package.json` の編集
+### Edit `package.json`
 
 `dependencies` の上に追記する。
 
@@ -99,7 +97,7 @@ $ touch .babelrc
   },
 ```
 
-### Add entry point - エントリポイントの追加
+### Add entry point
 
 `package.json` を編集。
 
@@ -107,7 +105,7 @@ $ touch .babelrc
 "main": "dest/app.js",
 ```
 
-### Add cron sample - cronのサンプルを追加
+### Add cron sample
 
 `src/app.js`を追加。
 
@@ -119,18 +117,15 @@ cron.schedule("* * * * * *", () => {
 });
 ```
 
-#### Run - 実行
+#### Run
 ```
 $ npm run start
 ```
 
-If you can execute this script and output it every 1 second OK.
 これで1秒おきに出力できたらOK。
 
 
-### Make`src/lib/UpdateProfile.js` - `src/lib/UpdateProfile.js`　の作成
-
-Use the Twitter API.
+### Make`src/lib/UpdateProfile.js`
 
 ここでTwitter APIを叩く。
 
@@ -142,8 +137,3 @@ module.exports = displayName => {
 
 };
 ```
-
-# Special Thanks
-- @OldBigBuddha
-- @floppy73
-- @progedu
