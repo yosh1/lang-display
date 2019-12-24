@@ -3,6 +3,7 @@ import updateProfile from './lib/UpdateProfile.js'
 import github from './lib/GitHubApi.js'
 import express from './lib/Express.js'
 
+// cron設定
 // cron.schedule("* * * * * *", () => {
 //     console.log("Hello World");
 
