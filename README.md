@@ -10,8 +10,12 @@ GitHubにコミットされたプログラミング言語の拡張を取得し�
 ### Local
 
 ```
-$ git clone https://github.com/yoshi1125hisa/lang-display.git or Fork
-$ npm install
+$ git clone <THIS_REPOSITORY>
+$ cd <THIS_REPOSITORY>
+$ npm i
+```
+
+```
 $ npm run start
 ```
 ### Docker
@@ -50,90 +54,3 @@ Twitterのプロフィールに「.」を入れて認証すると、GitHubのコ
 3. Twitter APIを叩く
 4. `UpdateAccount.js` で書いた処理を `src/app.js` で実行する
 5. GitHub APIに関してはTwitter APIの実装が終わった後
-
----
-
-## Develop flow
-
-### Install npm module
-```
-$ npm init
-$ npm install --save-dev @babel/cli @babel/core @babel/node @babel/preset-env @babel/register nodemon
-$ npm install --save node-cron axios dotenv twit
-```
-
-### Make file and directory
-```
-$ mkdir dest src src/lib
-$ touch .babelrc
-```
-
-### Edit `.babelrc`
-
-```
-{
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": true
-        }
-      }
-    ]
-  ]
-}
-```
-
-### Edit `package.json`
-
-`dependencies` の上に追記する。
-
-```
-"scripts": {
-    "start": "nodemon --exec babel-node src/app.js",
-    "build": "babel src --out-dir dest",
-    "boot": "node dest/app.js"
-  },
-```
-
-### Add entry point
-
-`package.json` を編集。
-
-```
-"main": "dest/app.js",
-```
-
-### Add cron sample
-
-`src/app.js`を追加。
-
-```
-import cron from "node-cron";
-
-cron.schedule("* * * * * *", () => {
-    console.log("Hello World");
-});
-```
-
-#### Run
-```
-$ npm run start
-```
-
-これで1秒おきに出力できたらOK。
-
-
-### Make`src/lib/UpdateProfile.js`
-
-ここでTwitter APIを叩く。
-
-```
-require("dotenv").config();
-import axios from "axios";
-
-module.exports = displayName => {
-
-};
-```
