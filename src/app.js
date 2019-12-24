@@ -9,11 +9,10 @@ import express from './lib/Express.js'
 
 // GitHub APIから言語を取得
 const userId = 'yoshi1125hisa' // Max - > array const userId = 'fabpot'
-// const userId = 'volanthers' // Min -> null
 const languageName = github(userId)
 
 
 // 取得した言語を渡す
-// updateProfile('yoshi.py')
+updateProfile('よし' + languageName)
 
 // });

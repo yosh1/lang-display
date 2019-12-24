@@ -2,7 +2,7 @@
 
 GitHubにコミットされたプログラミング言語の拡張を取得し、それに応じてTwitterのプロファイル名を変更するアプリケーションです。
 
-<img src="https://github.com/yoshi1125hisa/lang-display/blob/master/img/lang-display.png?raw=true" width="100%">
+<img src="./img/lang-display.png" width="100%">
 
 
 ## How2Run

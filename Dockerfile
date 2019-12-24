@@ -10,6 +10,6 @@ RUN set -x && \
     apk update --no-cache && \
     npm i
 
-# EXPOSE 3000
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]
