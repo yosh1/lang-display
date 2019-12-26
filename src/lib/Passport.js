@@ -1,6 +1,6 @@
 // http://passportjs.org/guide/twitter/
-var CONSUMER_KEY = process.env.CONSUMER_KEY;
-var CONSUMER_SECRET = process.env.CONSUMER_SECRET;
+var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
 var passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy;
 
@@ -14,8 +14,8 @@ passport.deserializeUser(function (obj, done) {
 });
 
 passport.use(new TwitterStrategy({
-        consumerKey: CONSUMER_KEY,
-        consumerSecret: CONSUMER_SECRET,
+        consumerKey: TWITTER_CONSUMER_KEY,
+        consumerSecret: TWITTER_CONSUMER_SECRET,
         callbackURL: "http://localhost:3000/auth/twitter/callback"
     },
     function (token, tokenSecret, profile, done) {

@@ -1,17 +1,21 @@
 const http = require('http');
 const express = require('express');
 const session = require('express-session')
-const auth = require('./passport');
+const auth = require('./Passport');
 const passport = auth.passport;
-var routes = require('./routes');
+var routes = require('../routes/Twitter');
 var app = express();
 var server = http.createServer(app);
+
+require("dotenv").config();
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({
-    secret: 'itagaki'
+    secret: 'yoshi'
 }));
+
+app.use(express.static(__dirname + '/public'));
 routes.configRoutes(app, server, passport);
 
 module.exports = express => {
