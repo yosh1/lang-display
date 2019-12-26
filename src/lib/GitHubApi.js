@@ -28,10 +28,10 @@ const getYestPushedRepos = events => {
   return getUniqueRepos(YestPushEvents)
 }
 
-const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
+const findUndefind = (targetRepo, array) => {
   for (let index = 0; index < array.length; index++) {
     // マッチした要素のIndexを返却する
-    if (array[index].url === targetRepository.url) {
+    if (array[index].url === targetRepo.url) {
       return index
     }
   }
@@ -45,14 +45,14 @@ const removeDuplicationRepos = Repos => {
 
   if (Repos.length > 0) {
     // 渡されたrepositoryが2個以上の場合
-    let existRepositoryIndexWithUndefined
+    let existRepoWithUndefined
     Repos.forEach(repository => {
-      existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
+      existRepoWithUndefined = findUndefind(repo, tempRepos)
 
-      if (existRepositoryIndexWithUndefined === undefined) {
-        tempRepos.push(repository)
+      if (existRepoWithUndefined === undefined) {
+        tempRepos.push(repo)
       } else {
-        tempRepos[existRepositoryIndexWithUndefined].commitCount += repository.commitCount
+        tempRepos[existRepoWithUndefined].commitCount += repo.commitCount
       }
     })
   }
@@ -73,7 +73,7 @@ module.exports = userName => {
 
         console.log(pushEvents)
 
-        // 昨日PushされたRepositoryだけを抜き出す
+        // 昨日Pushされたrepoだけを抜き出す
         const YestPushedRepos = getYestPushedRepos(pushEvents);
         let uniqueYestPushedRepos;
         let maxYestPushedRepos;
