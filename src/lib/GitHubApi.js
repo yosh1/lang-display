@@ -1,5 +1,7 @@
 import Axios from 'axios'
-import moment, { relativeTimeRounding } from 'moment'
+import moment, {
+  relativeTimeRounding
+} from 'moment'
 
 
 const axios = Axios.create({
@@ -11,7 +13,7 @@ const axios = Axios.create({
   responseType: 'json'
 })
 
-const getUniqueRepositories = events => {
+const getUniqueRepos = events => {
   return events.map(event => {
     return {
       url: event.repo.url,
@@ -20,10 +22,10 @@ const getUniqueRepositories = events => {
   })
 }
 
-const getLastDayPushedRepositories = events => {
-  const lastDay = moment().subtract(moment.duration(1, 'days'))
-  const lastDayPushEvents = events.filter(event => moment(event.created_at).date() === lastDay.date())
-  return getUniqueRepositories(lastDayPushEvents)
+const getYestPushedRepos = events => {
+  const Yest = moment().subtract(moment.duration(1, 'days'))
+  const YestPushEvents = events.filter(event => moment(event.created_at).date() === Yest.date())
+  return getUniqueRepos(YestPushEvents)
 }
 
 const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array) => {
@@ -37,14 +39,14 @@ const findTargetRepositoryIndexFromArrayWithUndefined = (targetRepository, array
   return undefined
 }
 
-const removeDuplicationRepositories = repositories => {
-  const tempRepos = [ repositories[0] ] // 一個は必ず入ってなくてはいけない
-  repositories.shift() // すでに代入したので先頭を削除
+const removeDuplicationRepos = Repos => {
+  const tempRepos = [Repos[0]] // 一個は必ず入ってなくてはいけない
+  Repos.shift() // すでに代入したので先頭を削除
 
-  if (repositories.length > 0) {
+  if (Repos.length > 0) {
     // 渡されたrepositoryが2個以上の場合
     let existRepositoryIndexWithUndefined
-    repositories.forEach(repository => {
+    Repos.forEach(repository => {
       existRepositoryIndexWithUndefined = findTargetRepositoryIndexFromArrayWithUndefined(repository, tempRepos)
 
       if (existRepositoryIndexWithUndefined === undefined) {
@@ -69,45 +71,49 @@ module.exports = userName => {
         // 現時点で、どのEventが昨日行われたのかはわからない
         const pushEvents = res.data.filter(event => event.type === 'PushEvent')
 
-        // 昨日PushされたRepositoryだけを抜き出す
-        const lastDayPushedRepositories = getLastDayPushedRepositories(pushEvents)
-        let uniqueLastDayPushedRepositories
-        let maxLastDayPushedRepositories
+        console.log(pushEvents)
 
-        if (lastDayPushedRepositories === undefined || lastDayPushedRepositories[0] === undefined) {
-          console.log("null")
+        // 昨日PushされたRepositoryだけを抜き出す
+        const YestPushedRepos = getYestPushedRepos(pushEvents);
+        let uniqueYestPushedRepos;
+        let maxYestPushedRepos;
+
+        if (YestPushedRepos === undefined || YestPushedRepos[0] === undefined) {
+          console.log("yesterdayPush: null")
         } else {
-          uniqueLastDayPushedRepositories = removeDuplicationRepositories(lastDayPushedRepositories)
-          maxLastDayPushedRepositories = Math.max.apply(null,uniqueLastDayPushedRepositories.map(function(o){return o.commitCount}))
-          let resultCommitArray = uniqueLastDayPushedRepositories.filter(item => item.commitCount == maxLastDayPushedRepositories)
+          uniqueYestPushedRepos = removeDuplicationRepos(YestPushedRepos)
+          maxYestPushedRepos = Math.max.apply(null, uniqueYestPushedRepos.map(function (o) {
+            return o.commitCount
+          }))
+          let resultCommitArray = uniqueYestPushedRepos.filter(item => item.commitCount == maxYestPushedRepos)
           let resultUrlArray = []
-          for( let i=0; i < resultCommitArray.length; i++){
-            resultUrlArray.push(resultCommitArray[i].url.replace("https://api.github.com/","") + "/languages")
+          for (let i = 0; i < resultCommitArray.length; i++) {
+            resultUrlArray.push(resultCommitArray[i].url.replace("https://api.github.com/", "") + "/languages")
           }
           getLangName(resultUrlArray)
-          console.log(resultUrlArray)    // URL Array
+          console.log("URLArray: " + resultUrlArray) // URL Array
         }
       } else {
-          console.error(`Status: ${res.status}\n${res.statusText}`)
-        }
-    }).catch( err => {
+        console.error(`Status: ${res.status}\n${res.statusText}`)
+      }
+    }).catch(err => {
       console.error(err)
     })
 }
 
 const getLangName = (resultUrl) => {
-  for (let i=0;i < resultUrl.length; i++){
-  axios.get(resultUrl[i])
-    .then(res => {
-      if (res.status === 200) {
-        const resultBestCommitLang = Object.keys(res.data)[0]
-        const resultBestCommitNum = res.data[Object.keys(res.data)[0]]
-        console.log(resultBestCommitLang + ":" + resultBestCommitNum)
-      } else {
-       console.error(`Status: ${res.status}\n${res.statusText}`)
-      }
-    }).catch( err => {
-      console.error(err)
-    })
+  for (let i = 0; i < resultUrl.length; i++) {
+    axios.get(resultUrl[i])
+      .then(res => {
+        if (res.status === 200) {
+          const resultBestCommitLang = Object.keys(res.data)[0]
+          const resultBestCommitNum = res.data[Object.keys(res.data)[0]]
+          console.log(resultBestCommitLang + ":" + resultBestCommitNum)
+        } else {
+          console.error(`Status: ${res.status}\n${res.statusText}`)
+        }
+      }).catch(err => {
+        console.error(err)
+      })
   }
 }

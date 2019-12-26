@@ -1,6 +1,6 @@
 // import cron from "node-cron";
-// import updateProfile from './lib/UpdateProfile.js'
-// import github from './lib/GitHubApi.js'
+import updateProfile from './lib/UpdateProfile.js';
+import github from './lib/GitHubApi.js';
 import express from './lib/Express.js';
 
 // cron設定
@@ -8,10 +8,10 @@ import express from './lib/Express.js';
 //     console.log("Hello World");
 
 // GitHub APIから言語を取得
-// const userId = 'yoshi1125hisa' 
+const userId = 'tenmakamatani';
 // Max - > array const userId = 'fabpot'
-// const languageName = github(userId)
-// updateProfile('よし' + languageName);
+const languageName = github(userId);
+updateProfile('よし.' + languageName);
 // });
 
 express();

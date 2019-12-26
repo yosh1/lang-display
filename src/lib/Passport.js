@@ -1,7 +1,8 @@
 // http://passportjs.org/guide/twitter/
-var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
-var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-var passport = require('passport'),
+require("dotenv").config();
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
+const passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy;
 
 // Sessionの設定
