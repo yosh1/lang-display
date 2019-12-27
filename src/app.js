@@ -10,8 +10,9 @@ import express from './lib/Express.js';
 // GitHub APIから言語を取得
 const userId = 'tenmakamatani';
 // Max - > array const userId = 'fabpot'
-const languageName = github(userId);
-updateProfile('よし.' + languageName);
+const langName = github(userId);
+updateProfile('よし.' + langName);
+
 // });
 
 express();
