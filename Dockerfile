@@ -7,11 +7,10 @@ COPY package*.json ${project_dir}}
 WORKDIR ${project_dir}
 
 RUN set -x && \
-    apk update --no-cache && \
-    npm i
+    yarn
 
 COPY . ${project_dir}
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
