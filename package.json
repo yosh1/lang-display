@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "express-session": "^1.17.0",
     "moment": "^2.23.0",
-    "node-cron": "^2.0.3",
+    "node-cron": "^3.0.0",
     "passport": "^0.4.1",
     "passport-twitter": "^1.0.4",
     "twit": "^2.2.11"
