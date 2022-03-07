@@ -11,7 +11,7 @@
     "@babel/node": "7.8.7",
     "@babel/preset-env": "7.8.7",
     "@babel/register": "7.8.6",
-    "nodemon": "2.0.2"
+    "nodemon": "2.0.15"
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/app.js",
